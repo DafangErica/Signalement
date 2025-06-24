@@ -26,72 +26,72 @@ import jakarta.persistence.TemporalType;
  * @author ERICA
  */
 @Entity
-@Table(name = "service")
+@Table(name = "domaine")
 @NamedQueries({
-    @NamedQuery(name = "Service.findAll", query = "SELECT s FROM Service s"),
-    @NamedQuery(name = "Service.findByServiceId", query = "SELECT s FROM Service s WHERE s.serviceId = :serviceId"),
-    @NamedQuery(name = "Service.findByNomService", query = "SELECT s FROM Service s WHERE s.nomService = :nomService"),
-    @NamedQuery(name = "Service.findByMailService", query = "SELECT s FROM Service s WHERE s.mailService = :mailService"),
-    @NamedQuery(name = "Service.findByCreatedAt", query = "SELECT s FROM Service s WHERE s.createdAt = :createdAt")})
-public class Service implements Serializable {
+    @NamedQuery(name = "Domaine.findAll", query = "SELECT d FROM Domaine d"),
+    @NamedQuery(name = "Domaine.findByDomaineId", query = "SELECT d FROM Domaine d WHERE d.domaineId = :domaineId"),
+    @NamedQuery(name = "Domaine.findByNomDomaine", query = "SELECT d FROM Domaine d WHERE d.nomDomaine = :nomDomaine"),
+    @NamedQuery(name = "Domaine.findByMailDomaine", query = "SELECT d FROM Domaine d WHERE d.mailDomaine = :mailDomaine"),
+    @NamedQuery(name = "Domaine.findByCreatedAt", query = "SELECT d FROM Domaine d WHERE d.createdAt = :createdAt")})
+public class Domaine implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "service_id")
-    private Integer serviceId;
+    @Column(name = "domaine_id")
+    private Integer domaineId;
     @Basic(optional = false)
-    @Column(name = "nom_service")
-    private String nomService;
+    @Column(name = "nom_domaine")
+    private String nomDomaine;
     @Basic(optional = false)
-    @Column(name = "mail_service")
-    private String mailService;
+    @Column(name = "mail_domaine")
+    private String mailDomaine;
     @Basic(optional = false)
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "serviceId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "domaineId")
     private Collection<Inspecteur> inspecteurCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "serviceId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "domaineId")
     private Collection<Signalement> signalementCollection;
 
-    public Service() {
+    public Domaine() {
     }
 
-    public Service(Integer serviceId) {
-        this.serviceId = serviceId;
+    public Domaine(Integer domaineId) {
+        this.domaineId = domaineId;
     }
 
-    public Service(Integer serviceId, String nomService, String mailService, Date createdAt) {
-        this.serviceId = serviceId;
-        this.nomService = nomService;
-        this.mailService = mailService;
+    public Domaine(Integer domaineId, String nomDomaine, String mailDomaine, Date createdAt) {
+        this.domaineId = domaineId;
+        this.nomDomaine = nomDomaine;
+        this.mailDomaine = mailDomaine;
         this.createdAt = createdAt;
     }
 
-    public Integer getServiceId() {
-        return serviceId;
+    public Integer getDomaineId() {
+        return domaineId;
     }
 
-    public void setServiceId(Integer serviceId) {
-        this.serviceId = serviceId;
+    public void setDomaineId(Integer domaineId) {
+        this.domaineId = domaineId;
     }
 
-    public String getNomService() {
-        return nomService;
+    public String getNomDomaine() {
+        return nomDomaine;
     }
 
-    public void setNomService(String nomService) {
-        this.nomService = nomService;
+    public void setNomDomaine(String nomDomaine) {
+        this.nomDomaine = nomDomaine;
     }
 
-    public String getMailService() {
-        return mailService;
+    public String getMailDomaine() {
+        return mailDomaine;
     }
 
-    public void setMailService(String mailService) {
-        this.mailService = mailService;
+    public void setMailDomaine(String mailDomaine) {
+        this.mailDomaine = mailDomaine;
     }
 
     public Date getCreatedAt() {
@@ -121,18 +121,18 @@ public class Service implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (serviceId != null ? serviceId.hashCode() : 0);
+        hash += (domaineId != null ? domaineId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Service)) {
+        if (!(object instanceof Domaine)) {
             return false;
         }
-        Service other = (Service) object;
-        if ((this.serviceId == null && other.serviceId != null) || (this.serviceId != null && !this.serviceId.equals(other.serviceId))) {
+        Domaine other = (Domaine) object;
+        if ((this.domaineId == null && other.domaineId != null) || (this.domaineId != null && !this.domaineId.equals(other.domaineId))) {
             return false;
         }
         return true;
@@ -140,7 +140,7 @@ public class Service implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.com.signalement.entities.Service[ serviceId=" + serviceId + " ]";
+        return "com.signalement.entities.Domaine[ domaineId=" + domaineId + " ]";
     }
     
 }

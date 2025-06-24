@@ -145,7 +145,7 @@ public class Inspection implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.com.signalement.entities.Inspection[ inspectionId=" + inspectionId + " ]";
+        return "com.signalement.entities.Inspection[ inspectionId=" + inspectionId + " ]";
     }
     
 }

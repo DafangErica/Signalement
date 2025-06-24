@@ -1,5 +1,4 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.signalement.entities;
@@ -143,7 +142,7 @@ public class Citoyen implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.com.signalement.entities.Citoyen[ citoyenId=" + citoyenId + " ]";
+        return "com.signalement.entities.Citoyen[ citoyenId=" + citoyenId + " ]";
     }
     
 }

@@ -57,9 +57,9 @@ public class Inspecteur implements Serializable {
     @JoinColumn(name = "admin_id", referencedColumnName = "admin_id")
     @ManyToOne(optional = false)
     private Admin adminId;
-    @JoinColumn(name = "service_id", referencedColumnName = "service_id")
+    @JoinColumn(name = "domaine_id", referencedColumnName = "domaine_id")
     @ManyToOne(optional = false)
-    private Service serviceId;
+    private Domaine domaineId;
 
     public Inspecteur() {
     }
@@ -124,12 +124,12 @@ public class Inspecteur implements Serializable {
         this.adminId = adminId;
     }
 
-    public Service getServiceId() {
-        return serviceId;
+    public Domaine getDomaineId() {
+        return domaineId;
     }
 
-    public void setServiceId(Service serviceId) {
-        this.serviceId = serviceId;
+    public void setDomaineId(Domaine domaineId) {
+        this.domaineId = domaineId;
     }
 
     @Override
@@ -154,7 +154,7 @@ public class Inspecteur implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.com.signalement.entities.Inspecteur[ inspecteurId=" + inspecteurId + " ]";
+        return "com.signalement.entities.Inspecteur[ inspecteurId=" + inspecteurId + " ]";
     }
     
 }

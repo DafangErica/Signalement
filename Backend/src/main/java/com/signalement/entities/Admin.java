@@ -143,7 +143,7 @@ public class Admin implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.com.signalement.entities.Admin[ adminId=" + adminId + " ]";
+        return "com.signalement.entities.Admin[ adminId=" + adminId + " ]";
     }
     
 }

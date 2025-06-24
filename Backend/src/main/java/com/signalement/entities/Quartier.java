@@ -100,7 +100,7 @@ public class Quartier implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.com.signalement.entities.Quartier[ quartierId=" + quartierId + " ]";
+        return "com.signalement.entities.Quartier[ quartierId=" + quartierId + " ]";
     }
     
 }

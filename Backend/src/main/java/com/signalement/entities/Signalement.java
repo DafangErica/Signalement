@@ -51,9 +51,9 @@ public class Signalement implements Serializable {
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
-    @JoinColumn(name = "service_id", referencedColumnName = "service_id")
+    @JoinColumn(name = "domaine_id", referencedColumnName = "domaine_id")
     @ManyToOne(optional = false)
-    private Service serviceId;
+    private Domaine domaineId;
     @JoinColumn(name = "citoyen_id", referencedColumnName = "citoyen_id")
     @ManyToOne(optional = false)
     private Citoyen citoyenId;
@@ -113,12 +113,12 @@ public class Signalement implements Serializable {
         this.createdAt = createdAt;
     }
 
-    public Service getServiceId() {
-        return serviceId;
+    public Domaine getDomaineId() {
+        return domaineId;
     }
 
-    public void setServiceId(Service serviceId) {
-        this.serviceId = serviceId;
+    public void setDomaineId(Domaine domaineId) {
+        this.domaineId = domaineId;
     }
 
     public Citoyen getCitoyenId() {
@@ -159,7 +159,7 @@ public class Signalement implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.com.signalement.entities.Signalement[ signalementId=" + signalementId + " ]";
+        return "com.signalement.entities.Signalement[ signalementId=" + signalementId + " ]";
     }
     
 }

@@ -150,7 +150,7 @@ public class Infrastructure implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.com.signalement.entities.Infrastructure[ infrastructureId=" + infrastructureId + " ]";
+        return "com.signalement.entities.Infrastructure[ infrastructureId=" + infrastructureId + " ]";
     }
     
 }
