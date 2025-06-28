@@ -36,26 +36,29 @@ import jakarta.persistence.TemporalType;
 public class Citoyen implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "citoyen_id")
     private Integer citoyenId;
+
     @Basic(optional = false)
     @Column(name = "nom_citoyen")
     private String nomCitoyen;
+
     @Basic(optional = false)
     @Column(name = "mail_citoyen")
     private String mailCitoyen;
+
     @Basic(optional = false)
     @Column(name = "pwd_citoyen")
     private String pwdCitoyen;
+
     @Basic(optional = false)
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "citoyenId")
-    private Collection<Signalement> signalementCollection;
 
     public Citoyen() {
     }
@@ -112,14 +115,6 @@ public class Citoyen implements Serializable {
         this.createdAt = createdAt;
     }
 
-    public Collection<Signalement> getSignalementCollection() {
-        return signalementCollection;
-    }
-
-    public void setSignalementCollection(Collection<Signalement> signalementCollection) {
-        this.signalementCollection = signalementCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -129,20 +124,16 @@ public class Citoyen implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Citoyen)) {
             return false;
         }
         Citoyen other = (Citoyen) object;
-        if ((this.citoyenId == null && other.citoyenId != null) || (this.citoyenId != null && !this.citoyenId.equals(other.citoyenId))) {
-            return false;
-        }
-        return true;
+        return (this.citoyenId != null || other.citoyenId == null) &&
+               (this.citoyenId == null || this.citoyenId.equals(other.citoyenId));
     }
 
     @Override
     public String toString() {
         return "com.signalement.entities.Citoyen[ citoyenId=" + citoyenId + " ]";
     }
-    
 }

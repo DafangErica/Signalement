@@ -36,26 +36,28 @@ import jakarta.persistence.Table;
 public class Infrastructure implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "infrastructure_id")
     private Integer infrastructureId;
+
     @Column(name = "nom_infrastructure")
     private String nomInfrastructure;
+
     @Column(name = "type")
     private String type;
+
     @Column(name = "etat")
     private String etat;
+
     @Column(name = "description_infrastructure")
     private String descriptionInfrastructure;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "infrastructureId")
-    private Collection<Signalement> signalementCollection;
+
     @JoinColumn(name = "quartier_id", referencedColumnName = "quartier_id")
     @ManyToOne(optional = false)
     private Quartier quartierId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "infrastructureId")
-    private Collection<Inspection> inspectionCollection;
 
     public Infrastructure() {
     }
@@ -104,28 +106,12 @@ public class Infrastructure implements Serializable {
         this.descriptionInfrastructure = descriptionInfrastructure;
     }
 
-    public Collection<Signalement> getSignalementCollection() {
-        return signalementCollection;
-    }
-
-    public void setSignalementCollection(Collection<Signalement> signalementCollection) {
-        this.signalementCollection = signalementCollection;
-    }
-
     public Quartier getQuartierId() {
         return quartierId;
     }
 
     public void setQuartierId(Quartier quartierId) {
         this.quartierId = quartierId;
-    }
-
-    public Collection<Inspection> getInspectionCollection() {
-        return inspectionCollection;
-    }
-
-    public void setInspectionCollection(Collection<Inspection> inspectionCollection) {
-        this.inspectionCollection = inspectionCollection;
     }
 
     @Override
@@ -137,15 +123,12 @@ public class Infrastructure implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Infrastructure)) {
             return false;
         }
         Infrastructure other = (Infrastructure) object;
-        if ((this.infrastructureId == null && other.infrastructureId != null) || (this.infrastructureId != null && !this.infrastructureId.equals(other.infrastructureId))) {
-            return false;
-        }
-        return true;
+        return (this.infrastructureId != null || other.infrastructureId == null) &&
+               (this.infrastructureId == null || this.infrastructureId.equals(other.infrastructureId));
     }
 
     @Override

@@ -36,27 +36,35 @@ import jakarta.persistence.TemporalType;
 public class Signalement implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "signalement_id")
     private Integer signalementId;
+
     @Column(name = "lib_signalement")
     private String libSignalement;
+
     @Column(name = "description_signalement")
     private String descriptionSignalement;
+
     @Column(name = "localisation")
     private String localisation;
+
     @Basic(optional = false)
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
+
     @JoinColumn(name = "domaine_id", referencedColumnName = "domaine_id")
     @ManyToOne(optional = false)
     private Domaine domaineId;
+
     @JoinColumn(name = "citoyen_id", referencedColumnName = "citoyen_id")
     @ManyToOne(optional = false)
     private Citoyen citoyenId;
+
     @JoinColumn(name = "infrastructure_id", referencedColumnName = "infrastructure_id")
     @ManyToOne(optional = false)
     private Infrastructure infrastructureId;
@@ -146,15 +154,12 @@ public class Signalement implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Signalement)) {
             return false;
         }
         Signalement other = (Signalement) object;
-        if ((this.signalementId == null && other.signalementId != null) || (this.signalementId != null && !this.signalementId.equals(other.signalementId))) {
-            return false;
-        }
-        return true;
+        return (this.signalementId != null || other.signalementId == null) &&
+               (this.signalementId == null || this.signalementId.equals(other.signalementId));
     }
 
     @Override

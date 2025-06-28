@@ -38,24 +38,28 @@ import jakarta.persistence.TemporalType;
 public class Inspection implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "inspection_id")
     private Integer inspectionId;
+
     @Column(name = "date")
     @Temporal(TemporalType.DATE)
     private Date date;
+
     @Column(name = "heure_debut")
     @Temporal(TemporalType.TIME)
     private Date heureDebut;
+
     @Column(name = "heure_fin")
     @Temporal(TemporalType.TIME)
     private Date heureFin;
+
     @Column(name = "description_inspection")
     private String descriptionInspection;
-    @ManyToMany(mappedBy = "inspectionCollection")
-    private Collection<Inspecteur> inspecteurCollection;
+
     @JoinColumn(name = "infrastructure_id", referencedColumnName = "infrastructure_id")
     @ManyToOne(optional = false)
     private Infrastructure infrastructureId;
@@ -107,14 +111,6 @@ public class Inspection implements Serializable {
         this.descriptionInspection = descriptionInspection;
     }
 
-    public Collection<Inspecteur> getInspecteurCollection() {
-        return inspecteurCollection;
-    }
-
-    public void setInspecteurCollection(Collection<Inspecteur> inspecteurCollection) {
-        this.inspecteurCollection = inspecteurCollection;
-    }
-
     public Infrastructure getInfrastructureId() {
         return infrastructureId;
     }
@@ -132,15 +128,12 @@ public class Inspection implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Inspection)) {
             return false;
         }
         Inspection other = (Inspection) object;
-        if ((this.inspectionId == null && other.inspectionId != null) || (this.inspectionId != null && !this.inspectionId.equals(other.inspectionId))) {
-            return false;
-        }
-        return true;
+        return (this.inspectionId != null || other.inspectionId == null) &&
+               (this.inspectionId == null || this.inspectionId.equals(other.inspectionId));
     }
 
     @Override

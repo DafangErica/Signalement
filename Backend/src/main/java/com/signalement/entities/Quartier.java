@@ -31,16 +31,16 @@ import jakarta.persistence.Table;
 public class Quartier implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "quartier_id")
     private Integer quartierId;
+
     @Basic(optional = false)
     @Column(name = "nom_quartier")
     private String nomQuartier;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "quartierId")
-    private Collection<Infrastructure> infrastructureCollection;
 
     public Quartier() {
     }
@@ -70,14 +70,6 @@ public class Quartier implements Serializable {
         this.nomQuartier = nomQuartier;
     }
 
-    public Collection<Infrastructure> getInfrastructureCollection() {
-        return infrastructureCollection;
-    }
-
-    public void setInfrastructureCollection(Collection<Infrastructure> infrastructureCollection) {
-        this.infrastructureCollection = infrastructureCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -87,15 +79,12 @@ public class Quartier implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Quartier)) {
             return false;
         }
         Quartier other = (Quartier) object;
-        if ((this.quartierId == null && other.quartierId != null) || (this.quartierId != null && !this.quartierId.equals(other.quartierId))) {
-            return false;
-        }
-        return true;
+        return (this.quartierId != null || other.quartierId == null) &&
+               (this.quartierId == null || this.quartierId.equals(other.quartierId));
     }
 
     @Override

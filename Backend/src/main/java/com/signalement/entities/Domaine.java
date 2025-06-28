@@ -36,25 +36,25 @@ import jakarta.persistence.TemporalType;
 public class Domaine implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "domaine_id")
     private Integer domaineId;
+
     @Basic(optional = false)
     @Column(name = "nom_domaine")
     private String nomDomaine;
+
     @Basic(optional = false)
     @Column(name = "mail_domaine")
     private String mailDomaine;
+
     @Basic(optional = false)
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "domaineId")
-    private Collection<Inspecteur> inspecteurCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "domaineId")
-    private Collection<Signalement> signalementCollection;
 
     public Domaine() {
     }
@@ -102,22 +102,6 @@ public class Domaine implements Serializable {
         this.createdAt = createdAt;
     }
 
-    public Collection<Inspecteur> getInspecteurCollection() {
-        return inspecteurCollection;
-    }
-
-    public void setInspecteurCollection(Collection<Inspecteur> inspecteurCollection) {
-        this.inspecteurCollection = inspecteurCollection;
-    }
-
-    public Collection<Signalement> getSignalementCollection() {
-        return signalementCollection;
-    }
-
-    public void setSignalementCollection(Collection<Signalement> signalementCollection) {
-        this.signalementCollection = signalementCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -127,15 +111,12 @@ public class Domaine implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Domaine)) {
             return false;
         }
         Domaine other = (Domaine) object;
-        if ((this.domaineId == null && other.domaineId != null) || (this.domaineId != null && !this.domaineId.equals(other.domaineId))) {
-            return false;
-        }
-        return true;
+        return (this.domaineId != null || other.domaineId == null) &&
+               (this.domaineId == null || this.domaineId.equals(other.domaineId));
     }
 
     @Override

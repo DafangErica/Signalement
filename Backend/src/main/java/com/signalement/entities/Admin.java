@@ -37,26 +37,29 @@ import jakarta.persistence.TemporalType;
 public class Admin implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "admin_id")
     private Integer adminId;
+
     @Basic(optional = false)
     @Column(name = "nom_admin")
     private String nomAdmin;
+
     @Basic(optional = false)
     @Column(name = "mail_admin")
     private String mailAdmin;
+
     @Basic(optional = false)
     @Column(name = "pwd_admin")
     private String pwdAdmin;
+
     @Basic(optional = false)
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "adminId")
-    private Collection<Inspecteur> inspecteurCollection;
 
     public Admin() {
     }
@@ -113,14 +116,6 @@ public class Admin implements Serializable {
         this.createdAt = createdAt;
     }
 
-    public Collection<Inspecteur> getInspecteurCollection() {
-        return inspecteurCollection;
-    }
-
-    public void setInspecteurCollection(Collection<Inspecteur> inspecteurCollection) {
-        this.inspecteurCollection = inspecteurCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -130,20 +125,16 @@ public class Admin implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Admin)) {
             return false;
         }
         Admin other = (Admin) object;
-        if ((this.adminId == null && other.adminId != null) || (this.adminId != null && !this.adminId.equals(other.adminId))) {
-            return false;
-        }
-        return true;
+        return (this.adminId != null || other.adminId == null) &&
+               (this.adminId == null || this.adminId.equals(other.adminId));
     }
 
     @Override
     public String toString() {
         return "com.signalement.entities.Admin[ adminId=" + adminId + " ]";
     }
-    
 }

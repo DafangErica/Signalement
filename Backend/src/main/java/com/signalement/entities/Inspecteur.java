@@ -36,27 +36,29 @@ import jakarta.persistence.Table;
 public class Inspecteur implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "inspecteur_id")
     private Integer inspecteurId;
+
     @Column(name = "nom_inspecteur")
     private String nomInspecteur;
+
     @Column(name = "tel_inspecteur")
     private String telInspecteur;
+
     @Column(name = "mail_inspecteur")
     private String mailInspecteur;
+
     @Column(name = "pwd_inspecteur")
     private String pwdInspecteur;
-    @JoinTable(name = "executer", joinColumns = {
-        @JoinColumn(name = "inspecteur_id", referencedColumnName = "inspecteur_id")}, inverseJoinColumns = {
-        @JoinColumn(name = "inspection_id", referencedColumnName = "inspection_id")})
-    @ManyToMany
-    private Collection<Inspection> inspectionCollection;
+
     @JoinColumn(name = "admin_id", referencedColumnName = "admin_id")
     @ManyToOne(optional = false)
     private Admin adminId;
+
     @JoinColumn(name = "domaine_id", referencedColumnName = "domaine_id")
     @ManyToOne(optional = false)
     private Domaine domaineId;
@@ -108,14 +110,6 @@ public class Inspecteur implements Serializable {
         this.pwdInspecteur = pwdInspecteur;
     }
 
-    public Collection<Inspection> getInspectionCollection() {
-        return inspectionCollection;
-    }
-
-    public void setInspectionCollection(Collection<Inspection> inspectionCollection) {
-        this.inspectionCollection = inspectionCollection;
-    }
-
     public Admin getAdminId() {
         return adminId;
     }
@@ -141,15 +135,12 @@ public class Inspecteur implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Inspecteur)) {
             return false;
         }
         Inspecteur other = (Inspecteur) object;
-        if ((this.inspecteurId == null && other.inspecteurId != null) || (this.inspecteurId != null && !this.inspecteurId.equals(other.inspecteurId))) {
-            return false;
-        }
-        return true;
+        return (this.inspecteurId != null || other.inspecteurId == null) &&
+               (this.inspecteurId == null || this.inspecteurId.equals(other.inspecteurId));
     }
 
     @Override
