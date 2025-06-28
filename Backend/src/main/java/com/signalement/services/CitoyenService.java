@@ -16,7 +16,7 @@ import com.signalement.repositories.CitoyenRepos;
 public class CitoyenService {
 	@Autowired
 	CitoyenRepos citoyenRepos;
-	public Citoyen saveOrCitoyen(Citoyen c) {
+	public Citoyen saveOrUpdate(Citoyen c) {
 		if(!c.getNomCitoyen().isEmpty() && !c.getMailCitoyen().isEmpty() && !c.getPwdCitoyen().isEmpty()) {
 			return citoyenRepos.save(c);
 		}

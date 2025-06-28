@@ -14,38 +14,43 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.signalement.entities.Inspecteur;
-import com.signalement.services.InspecteurService;
+import com.signalement.entities.Signalement;
+import com.signalement.services.SignalementService;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/inspecteur")
-public class InspecteurController {
+@RequestMapping("/signalement")
+public class SignalementController {
 	@Autowired
-	InspecteurService inspecteurService;
+	SignalementService signalementService;
 	@PostMapping
-	public ResponseEntity<?> save(@RequestBody Inspecteur i) {
-		Inspecteur res = inspecteurService.saveOrUpdate(i);
-		if(res == null) {
-			return new ResponseEntity<>("Echec d'enregistrement", HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return new ResponseEntity<>(res, HttpStatus.OK);
+	public ResponseEntity<?> save(@RequestBody Signalement s){
+	Signalement res =signalementService.saveOrUpdate(s);
+	if (res== null) {
+		return new ResponseEntity<>("Echec de l'enregistrement", HttpStatus.INTERNAL_SERVER_ERROR);
+		
+	}
+	return new ResponseEntity<>(res, HttpStatus.OK);
 	}
 	
 	@GetMapping
 	public ResponseEntity<?> get() {
-		return new ResponseEntity<>(inspecteurService.getAll(), HttpStatus.OK);
+		return new ResponseEntity<>(signalementService.getAll(), HttpStatus.OK);
+		
 	}
 	
-	@DeleteMapping(value = "/{inspecteurId}")
-	public ResponseEntity<String> delete(@PathVariable("inspecteurId") Integer inspecteurId){
+	@DeleteMapping(value = "/{signalementId}")
+	public ResponseEntity<String> delete(@PathVariable("signalementId") Integer signalementId){
 		try {
-			inspecteurService.delete(inspecteurId);
-		      return new ResponseEntity<>("Inspecteur supprimé avec succès", HttpStatus.NO_CONTENT);
+			signalementService.delete(signalementId);
+		      return new ResponseEntity<>("Signalement supprimé avec succès", HttpStatus.NO_CONTENT);
 		} catch (NoSuchElementException e) {
-			        return new ResponseEntity<>("Aucun Inspecteur trouvé avec l'ID : " + inspecteurId, HttpStatus.NOT_FOUND);
+			        return new ResponseEntity<>("Aucun Signalement trouvé avec l'ID : " + signalementId, HttpStatus.NOT_FOUND);
      	} catch (Exception e) {
 			        return new ResponseEntity<>("Échec de la suppression", HttpStatus.INTERNAL_SERVER_ERROR);
 			    }
 	}
-}
+	}
+
+
+

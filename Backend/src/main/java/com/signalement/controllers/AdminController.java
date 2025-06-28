@@ -14,38 +14,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.signalement.entities.Inspecteur;
-import com.signalement.services.InspecteurService;
+import com.signalement.entities.Admin;
+import com.signalement.services.AdminService;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/inspecteur")
-public class InspecteurController {
+@RequestMapping("/admin")
+public class AdminController {
+
 	@Autowired
-	InspecteurService inspecteurService;
+	AdminService adminService;
 	@PostMapping
-	public ResponseEntity<?> save(@RequestBody Inspecteur i) {
-		Inspecteur res = inspecteurService.saveOrUpdate(i);
+	public ResponseEntity<?> save(@RequestBody Admin a) {
+		Admin res = adminService.saveOrUpdate(a);
 		if(res == null) {
 			return new ResponseEntity<>("Echec d'enregistrement", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<>(res, HttpStatus.OK);
 	}
-	
 	@GetMapping
-	public ResponseEntity<?> get() {
-		return new ResponseEntity<>(inspecteurService.getAll(), HttpStatus.OK);
+	public ResponseEntity<?> get(){
+		return new ResponseEntity<>(adminService.getAll(), HttpStatus.OK);
 	}
 	
-	@DeleteMapping(value = "/{inspecteurId}")
-	public ResponseEntity<String> delete(@PathVariable("inspecteurId") Integer inspecteurId){
+	@DeleteMapping(value = "/{adminId}")
+	public ResponseEntity<String> delete(@PathVariable("adminId") Integer adminId){
 		try {
-			inspecteurService.delete(inspecteurId);
-		      return new ResponseEntity<>("Inspecteur supprimé avec succès", HttpStatus.NO_CONTENT);
+				adminService.delete(adminId);
+		      return new ResponseEntity<>("Administrateur supprimé avec succès", HttpStatus.NO_CONTENT);
 		} catch (NoSuchElementException e) {
-			        return new ResponseEntity<>("Aucun Inspecteur trouvé avec l'ID : " + inspecteurId, HttpStatus.NOT_FOUND);
-     	} catch (Exception e) {
+			        return new ResponseEntity<>("Aucun Administrateur trouvé avec l'ID : " + adminId, HttpStatus.NOT_FOUND);
+   	} catch (Exception e) {
 			        return new ResponseEntity<>("Échec de la suppression", HttpStatus.INTERNAL_SERVER_ERROR);
 			    }
-	}
+		}
 }
