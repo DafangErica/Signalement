@@ -36,7 +36,7 @@ public class QuartierController {
 		return new ResponseEntity<>(quartierService.getAll(), HttpStatus.OK);
 	}
 	
-	@DeleteMapping(value= "/quartierId")
+	@DeleteMapping(value= "/{quartierId}")
 	public ResponseEntity<String> delete(@PathVariable("quartierId") Integer quartierId){
 		try {
 			quartierService.delete(quartierId);

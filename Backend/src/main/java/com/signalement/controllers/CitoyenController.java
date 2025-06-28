@@ -30,7 +30,6 @@ public class CitoyenController {
 			return new ResponseEntity<>("Echec de l'enregistrement ", HttpStatus.INTERNAL_SERVER_ERROR);	
 		}
 		return new ResponseEntity<>(res,HttpStatus.OK);
-		
 	}
 	@GetMapping
 	public ResponseEntity<?> get(){
@@ -39,7 +38,7 @@ public class CitoyenController {
 	
 	}
 	
-	@DeleteMapping(value="/{}citoyenId")
+	@DeleteMapping(value="/{citoyenId}")
 	public ResponseEntity<String> deletre(@PathVariable("citoyenId")Integer citoyenId){
 		try {
 			citoyenService.delete(citoyenId);
