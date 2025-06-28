@@ -19,6 +19,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
 
 /**
  *
@@ -62,6 +63,10 @@ public class Inspecteur implements Serializable {
     @JoinColumn(name = "domaine_id", referencedColumnName = "domaine_id")
     @ManyToOne(optional = false)
     private Domaine domaineId;
+
+    @Version
+    @Column(name = "version")
+    private Integer version;
 
     public Inspecteur() {
     }
@@ -147,5 +152,4 @@ public class Inspecteur implements Serializable {
     public String toString() {
         return "com.signalement.entities.Inspecteur[ inspecteurId=" + inspecteurId + " ]";
     }
-    
 }

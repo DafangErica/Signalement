@@ -20,6 +20,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.persistence.Version;
 
 /**
  *
@@ -55,6 +56,10 @@ public class Domaine implements Serializable {
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
+
+    @Version
+    @Column(name = "version")
+    private Integer version;
 
     public Domaine() {
     }
@@ -123,5 +128,4 @@ public class Domaine implements Serializable {
     public String toString() {
         return "com.signalement.entities.Domaine[ domaineId=" + domaineId + " ]";
     }
-    
 }

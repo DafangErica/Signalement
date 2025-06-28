@@ -17,6 +17,7 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
 
 /**
  *
@@ -41,6 +42,10 @@ public class Quartier implements Serializable {
     @Basic(optional = false)
     @Column(name = "nom_quartier")
     private String nomQuartier;
+
+    @Version
+    @Column(name = "version")
+    private Integer version;
 
     public Quartier() {
     }

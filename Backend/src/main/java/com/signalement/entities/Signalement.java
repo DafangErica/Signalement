@@ -19,6 +19,7 @@ import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.persistence.Version;
 
 /**
  *
@@ -68,6 +69,10 @@ public class Signalement implements Serializable {
     @JoinColumn(name = "infrastructure_id", referencedColumnName = "infrastructure_id")
     @ManyToOne(optional = false)
     private Infrastructure infrastructureId;
+
+    @Version
+    @Column(name = "version")
+    private Integer version;
 
     public Signalement() {
     }
@@ -166,5 +171,4 @@ public class Signalement implements Serializable {
     public String toString() {
         return "com.signalement.entities.Signalement[ signalementId=" + signalementId + " ]";
     }
-    
 }
